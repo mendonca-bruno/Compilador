@@ -438,18 +438,6 @@ public class CompiladorBaseListener implements CompiladorListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFloatAtr(CompiladorParser.FloatAtrContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFloatAtr(CompiladorParser.FloatAtrContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterStringAtr(CompiladorParser.StringAtrContext ctx) { }
 	/**
 	 * {@inheritDoc}

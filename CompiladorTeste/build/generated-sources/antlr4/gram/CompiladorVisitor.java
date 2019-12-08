@@ -250,13 +250,6 @@ public interface CompiladorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDoubleAtr(CompiladorParser.DoubleAtrContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code FloatAtr}
-	 * labeled alternative in {@link CompiladorParser#atr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFloatAtr(CompiladorParser.FloatAtrContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code StringAtr}
 	 * labeled alternative in {@link CompiladorParser#atr}.
 	 * @param ctx the parse tree

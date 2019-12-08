@@ -68,7 +68,6 @@ retr:   RET VAR EOL                                                             
         ;
 atr:    INT VAR '=' (expr|callfunc)                                             #IntAtr
         | DOUBLE VAR '=' (expr|callfunc)                                        #DoubleAtr
-        | FLOAT VAR '=' (expr|callfunc)                                         #FloatAtr
         | STRING VAR '=' (STRVALUE|callfunc)                                    #StringAtr
         | BOOL  VAR '=' (TRUE|FALSE)                                            #BoolAtr
         | VAR '=' (expr|callfunc)                                               #VarExprFuncAtr

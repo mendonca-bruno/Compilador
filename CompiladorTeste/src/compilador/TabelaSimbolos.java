@@ -13,7 +13,7 @@ import java.util.HashMap;
  * @author Bruno
  */
 public class TabelaSimbolos {
-    private HashMap <ControleContexto,ArrayList<ConteudoContexto>> tabelaSimbolo;
+    private static HashMap <ControleContexto,ArrayList<ConteudoContexto>> tabelaSimbolo;
     
     public TabelaSimbolos(){
         tabelaSimbolo = new HashMap<>();
@@ -34,4 +34,29 @@ public class TabelaSimbolos {
         return tabelaSimbolo.size();
     }   
     
+    public void mostraTabela(ControleContexto controle){
+        if(controle.isFuncao()){
+            System.out.println("Escopo Funcao: " +controle.nomeFuncao);
+        }else System.out.println("Escopo Global:");
+        for(ConteudoContexto c : tabelaSimbolo.get(controle)){
+            System.out.println("Id: " +c.id);
+            System.out.println("Tipo: " +c.tipo);
+            System.out.println("Valor: " +(Number)c.valor);
+        }
+    }
+    
+    public Object achaValor(ControleContexto cc, String var){
+        Object valor = null;
+        
+        if(cc!=null){
+            for (ConteudoContexto conteudo : tabelaSimbolo.get(cc)){
+                if(conteudo.id.equals(var)){
+                    valor = conteudo;
+                    return valor;
+                }
+            }
+        }
+        
+        return valor;
+    }
 }

@@ -264,13 +264,6 @@ public class CompiladorBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFloatAtr(CompiladorParser.FloatAtrContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitStringAtr(CompiladorParser.StringAtrContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

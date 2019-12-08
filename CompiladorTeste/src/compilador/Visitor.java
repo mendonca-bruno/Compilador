@@ -37,6 +37,12 @@ public class Visitor extends CompiladorBaseVisitor{
     }
     
     @Override
+    public Object visitVarFact(CompiladorParser.VarFactContext ctx){
+        String id = ctx.getText();
+        return id; //falta retornar o valor deste id.
+    }
+    
+    @Override
     public Object visitIntAtr(CompiladorParser.IntAtrContext ctx){
         AuxiliaTabela aux;
         Token firstToken = ctx.start;
@@ -51,8 +57,22 @@ public class Visitor extends CompiladorBaseVisitor{
     }
     
     @Override
+    public Object visitDoubleAtr(CompiladorParser.DoubleAtrContext ctx){
+        AuxiliaTabela aux;
+        Token firstToken = ctx.start;
+        Tipo verificaTipo = (Tipo) visit(ctx.expr());        
+        if(verificaTipo.getTipo().equals("Integer")){
+            System.out.println("Erro na linha: " +firstToken.getLine() + " Coluna: " +firstToken.getCharPositionInLine() + " - Tipo Incompativel!");
+            aux = new AuxiliaTabela(verificaTipo, false, (String)ctx.VAR().getText());
+            return aux;
+        }
+        aux = new AuxiliaTabela(verificaTipo, true, (String)ctx.VAR().getText());
+        return aux;
+    }
+    
+    @Override
     public Object visitSumExpr(CompiladorParser.SumExprContext ctx){
-        
+        System.out.println(ctx.getParent().getParent().getRuleIndex());
         return new Util().somar((Tipo)visit(ctx.expr()), (Tipo)visit(ctx.term())); //retorna Tipo
     }
     
@@ -61,12 +81,29 @@ public class Visitor extends CompiladorBaseVisitor{
     public Object visitAtrLine(CompiladorParser.AtrLineContext ctx){
         AuxiliaTabela auxilia = (AuxiliaTabela)visit(ctx.atr());
         if(auxilia.isRetorno()){
-            ControleContexto cc = ControleContexto.getInstance(true, false, "");
+            ControleContexto cc = ControleContexto.checaContexto(true, false, "");
             ConteudoContexto conteudo = new ConteudoContexto(auxilia.tipo.tipo, auxilia.ID, auxilia.tipo.valor);
             tabela.adicionaTabela(cc,conteudo);
-            System.out.println(tabela.tamanhoTabela());
+            //System.out.println(tabela.tamanhoTabela());
+            //tabela.mostraTabela(cc);
             return true;
         }
         return false;
     }
+    
+    @Override
+    public Object visitPrintLine(CompiladorParser.PrintLineContext ctx ){
+        String id = (String)visit(ctx.print());
+        ControleContexto cc = ControleContexto.checaContexto(true, false, "");
+        ConteudoContexto conteudo = (ConteudoContexto)tabela.achaValor(cc, id);
+        System.out.println(conteudo.valor);
+        return conteudo;
+    }
+    
+    @Override
+    public Object visitVarPrint(CompiladorParser.VarPrintContext ctx){
+        String id = ctx.VAR().getText();
+        return id;
+    }
+    
 }

@@ -414,18 +414,6 @@ public interface CompiladorListener extends ParseTreeListener {
 	 */
 	void exitDoubleAtr(CompiladorParser.DoubleAtrContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code FloatAtr}
-	 * labeled alternative in {@link CompiladorParser#atr}.
-	 * @param ctx the parse tree
-	 */
-	void enterFloatAtr(CompiladorParser.FloatAtrContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code FloatAtr}
-	 * labeled alternative in {@link CompiladorParser#atr}.
-	 * @param ctx the parse tree
-	 */
-	void exitFloatAtr(CompiladorParser.FloatAtrContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code StringAtr}
 	 * labeled alternative in {@link CompiladorParser#atr}.
 	 * @param ctx the parse tree
