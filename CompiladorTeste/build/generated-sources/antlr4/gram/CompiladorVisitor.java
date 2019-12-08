@@ -1,4 +1,4 @@
-// Generated from R:\Users\Bruno\Documents\NetBeansProjects\CompiladorTeste\grammar\gram\Compilador.g4 by ANTLR 4.6
+// Generated from R:\Users\Bruno\Documents\CompiladorProjeto\Definitivo\CompiladorTeste\grammar\gram\Compilador.g4 by ANTLR 4.6
 
     package gram;
 
@@ -19,11 +19,26 @@ public interface CompiladorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProg(CompiladorParser.ProgContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CompiladorParser#line}.
+	 * Visit a parse tree produced by the {@code AtrLine}
+	 * labeled alternative in {@link CompiladorParser#line}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLine(CompiladorParser.LineContext ctx);
+	T visitAtrLine(CompiladorParser.AtrLineContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code InitLine}
+	 * labeled alternative in {@link CompiladorParser#line}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInitLine(CompiladorParser.InitLineContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code CallFuncLine}
+	 * labeled alternative in {@link CompiladorParser#line}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCallFuncLine(CompiladorParser.CallFuncLineContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CompiladorParser#func}.
 	 * @param ctx the parse tree

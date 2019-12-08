@@ -1,4 +1,4 @@
-// Generated from R:\Users\Bruno\Documents\NetBeansProjects\CompiladorTeste\grammar\gram\Compilador.g4 by ANTLR 4.6
+// Generated from R:\Users\Bruno\Documents\CompiladorProjeto\Definitivo\CompiladorTeste\grammar\gram\Compilador.g4 by ANTLR 4.6
 
     package gram;
 
@@ -20,15 +20,41 @@ public interface CompiladorListener extends ParseTreeListener {
 	 */
 	void exitProg(CompiladorParser.ProgContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CompiladorParser#line}.
+	 * Enter a parse tree produced by the {@code AtrLine}
+	 * labeled alternative in {@link CompiladorParser#line}.
 	 * @param ctx the parse tree
 	 */
-	void enterLine(CompiladorParser.LineContext ctx);
+	void enterAtrLine(CompiladorParser.AtrLineContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CompiladorParser#line}.
+	 * Exit a parse tree produced by the {@code AtrLine}
+	 * labeled alternative in {@link CompiladorParser#line}.
 	 * @param ctx the parse tree
 	 */
-	void exitLine(CompiladorParser.LineContext ctx);
+	void exitAtrLine(CompiladorParser.AtrLineContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code InitLine}
+	 * labeled alternative in {@link CompiladorParser#line}.
+	 * @param ctx the parse tree
+	 */
+	void enterInitLine(CompiladorParser.InitLineContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code InitLine}
+	 * labeled alternative in {@link CompiladorParser#line}.
+	 * @param ctx the parse tree
+	 */
+	void exitInitLine(CompiladorParser.InitLineContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code CallFuncLine}
+	 * labeled alternative in {@link CompiladorParser#line}.
+	 * @param ctx the parse tree
+	 */
+	void enterCallFuncLine(CompiladorParser.CallFuncLineContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code CallFuncLine}
+	 * labeled alternative in {@link CompiladorParser#line}.
+	 * @param ctx the parse tree
+	 */
+	void exitCallFuncLine(CompiladorParser.CallFuncLineContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CompiladorParser#func}.
 	 * @param ctx the parse tree

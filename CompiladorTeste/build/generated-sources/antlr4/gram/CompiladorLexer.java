@@ -1,4 +1,4 @@
-// Generated from R:\Users\Bruno\Documents\NetBeansProjects\CompiladorTeste\grammar\gram\Compilador.g4 by ANTLR 4.6
+// Generated from R:\Users\Bruno\Documents\CompiladorProjeto\Definitivo\CompiladorTeste\grammar\gram\Compilador.g4 by ANTLR 4.6
 
     package gram;
 

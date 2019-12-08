@@ -10,9 +10,9 @@ grammar Compilador;
 prog:   (line EOL | func)+ EOF
         | IMPORT '<' VAR'.'GRAMATICA'>'';' prog
         ;
-line:   atr
-        | init_
-        | callfunc
+line:   atr                                                                     #AtrLine
+        | init_                                                                 #InitLine
+        | callfunc                                                              #CallFuncLine
         ;
 func:   type_ VAR '(' (((type_ VAR)';'?)+|'0') ')' OBR (cmd)+ retr CBR
         | VOID VAR '(' (((type_ VAR)';'?)+|'0') ')' OBR (cmd)+ CBR
@@ -85,7 +85,7 @@ term:   fact                                                                    
         ;
 fact:   VAR                                                                     #varFact        
         | NUMDOUBLE                                                             #NumDoubleFact
-        | NUMINT                                                                #NumIntFact
+        | (NUMINT|'0')                                                          #NumIntFact
         | '('expr')'                                                            #exprFact
         ;
 type_:   INT                                                                    #intType

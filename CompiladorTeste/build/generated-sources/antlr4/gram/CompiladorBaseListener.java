@@ -1,4 +1,4 @@
-// Generated from R:\Users\Bruno\Documents\NetBeansProjects\CompiladorTeste\grammar\gram\Compilador.g4 by ANTLR 4.6
+// Generated from R:\Users\Bruno\Documents\CompiladorProjeto\Definitivo\CompiladorTeste\grammar\gram\Compilador.g4 by ANTLR 4.6
 
     package gram;
 
@@ -30,13 +30,37 @@ public class CompiladorBaseListener implements CompiladorListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLine(CompiladorParser.LineContext ctx) { }
+	@Override public void enterAtrLine(CompiladorParser.AtrLineContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLine(CompiladorParser.LineContext ctx) { }
+	@Override public void exitAtrLine(CompiladorParser.AtrLineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInitLine(CompiladorParser.InitLineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInitLine(CompiladorParser.InitLineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCallFuncLine(CompiladorParser.CallFuncLineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCallFuncLine(CompiladorParser.CallFuncLineContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

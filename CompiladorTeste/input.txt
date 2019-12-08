@@ -1,2 +1,6 @@
-int x = 1;
-int t = 20 + 20.5;
+int x = 0;
+void foo(0){
+    print(x);
+    int x = 1;
+}
+int y = 0;

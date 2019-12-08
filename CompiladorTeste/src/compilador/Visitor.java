@@ -6,6 +6,7 @@
 package compilador;
 import gram.CompiladorBaseVisitor;
 import gram.CompiladorParser;
+import java.util.ArrayList;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.misc.Interval;
@@ -18,6 +19,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * @author Bruno
  */
 public class Visitor extends CompiladorBaseVisitor{
+    TabelaSimbolos tabela = new TabelaSimbolos();
     
     @Override
     public Object visitNumDoubleFact(CompiladorParser.NumDoubleFactContext ctx){
@@ -36,19 +38,33 @@ public class Visitor extends CompiladorBaseVisitor{
     
     @Override
     public Object visitIntAtr(CompiladorParser.IntAtrContext ctx){
+        AuxiliaTabela aux;
         Token firstToken = ctx.start;
         Tipo verificaTipo = (Tipo) visit(ctx.expr());        
         if(verificaTipo.getTipo().equals("Double")){
             System.out.println("Erro na linha: " +firstToken.getLine() + " Coluna: " +firstToken.getCharPositionInLine() + " - Tipo Incompativel!");
-            return false;
+            aux = new AuxiliaTabela(verificaTipo, false);
+            return aux;
         }
-        return true;
+        aux = new AuxiliaTabela(verificaTipo, true);
+        return aux;
     }
     
     @Override
     public Object visitSumExpr(CompiladorParser.SumExprContext ctx){
         
-        return new Util().somar((Tipo)visit(ctx.expr()), (Tipo)visit(ctx.term()));
+        return new Util().somar((Tipo)visit(ctx.expr()), (Tipo)visit(ctx.term())); //retorna Tipo
     }
     
+    
+    @Override
+    public Object visitAtrLine(CompiladorParser.AtrLineContext ctx){
+        AuxiliaTabela auxilia = (AuxiliaTabela)visit(ctx.atr());
+        if(auxilia.isRetorno()){
+            ControleContexto cc = new ControleContexto(true, false, "");
+            tabela.adicionaTabela(auxilia.getTipo(), cc);
+            return true;
+        }
+        return false;
+    }
 }
