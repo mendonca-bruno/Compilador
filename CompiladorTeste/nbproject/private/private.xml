@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/R:/Users/Bruno/Documents/NetBeansProjects/CompiladorTeste/input.txt</file>
-            <file>file:/R:/Users/Bruno/Documents/NetBeansProjects/CompiladorTeste/grammar/gram/Compilador.g4</file>
-            <file>file:/R:/Users/Bruno/Documents/NetBeansProjects/CompiladorTeste/src/compilador/Run.java</file>
-            <file>file:/R:/Users/Bruno/Documents/NetBeansProjects/CompiladorTeste/src/compilador/Tipo.java</file>
-            <file>file:/R:/Users/Bruno/Documents/NetBeansProjects/CompiladorTeste/src/compilador/Visitor.java</file>
-            <file>file:/R:/Users/Bruno/Documents/NetBeansProjects/CompiladorTeste/src/compilador/Util.java</file>
+            <file>file:/R:/Users/Bruno/Documents/CompiladorProjeto/Definitivo/CompiladorTeste/input.txt</file>
+            <file>file:/R:/Users/Bruno/Documents/CompiladorProjeto/Definitivo/CompiladorTeste/src/compilador/AuxiliaTabela.java</file>
+            <file>file:/R:/Users/Bruno/Documents/CompiladorProjeto/Definitivo/CompiladorTeste/grammar/gram/Compilador.g4</file>
+            <file>file:/R:/Users/Bruno/Documents/CompiladorProjeto/Definitivo/CompiladorTeste/src/compilador/Util.java</file>
+            <file>file:/R:/Users/Bruno/Documents/CompiladorProjeto/Definitivo/CompiladorTeste/src/compilador/ControleContexto.java</file>
+            <file>file:/R:/Users/Bruno/Documents/CompiladorProjeto/Definitivo/CompiladorTeste/src/compilador/Visitor.java</file>
+            <file>file:/R:/Users/Bruno/Documents/CompiladorProjeto/Definitivo/CompiladorTeste/src/compilador/TabelaSimbolos.java</file>
+            <file>file:/R:/Users/Bruno/Documents/CompiladorProjeto/Definitivo/CompiladorTeste/src/compilador/Tipo.java</file>
         </group>
     </open-files>
 </project-private>

@@ -5,6 +5,7 @@
  */
 package compilador;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -12,14 +13,20 @@ import java.util.HashMap;
  * @author Bruno
  */
 public class TabelaSimbolos {
-    private HashMap <Tipo,ControleContexto> tabelaSimbolo;
+    private HashMap <ControleContexto,ArrayList<ConteudoContexto>> tabelaSimbolo;
     
     public TabelaSimbolos(){
         tabelaSimbolo = new HashMap<>();
     }
     
-    public void adicionaTabela(Tipo tipo, ControleContexto controle){
-        tabelaSimbolo.put(tipo, controle);
+    public void adicionaTabela(ControleContexto controle, ConteudoContexto conteudo){
+        if(tabelaSimbolo.get(controle)==null){
+            ArrayList<ConteudoContexto> cont = new ArrayList<>();
+            cont.add(conteudo);
+            tabelaSimbolo.put(controle, cont);
+            return;
+        }
+        tabelaSimbolo.get(controle).add(conteudo);
         
     }
     

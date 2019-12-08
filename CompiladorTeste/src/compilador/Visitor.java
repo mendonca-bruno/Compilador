@@ -43,10 +43,10 @@ public class Visitor extends CompiladorBaseVisitor{
         Tipo verificaTipo = (Tipo) visit(ctx.expr());        
         if(verificaTipo.getTipo().equals("Double")){
             System.out.println("Erro na linha: " +firstToken.getLine() + " Coluna: " +firstToken.getCharPositionInLine() + " - Tipo Incompativel!");
-            aux = new AuxiliaTabela(verificaTipo, false);
+            aux = new AuxiliaTabela(verificaTipo, false, (String)ctx.VAR().getText());
             return aux;
         }
-        aux = new AuxiliaTabela(verificaTipo, true);
+        aux = new AuxiliaTabela(verificaTipo, true, (String)ctx.VAR().getText());
         return aux;
     }
     
@@ -61,8 +61,10 @@ public class Visitor extends CompiladorBaseVisitor{
     public Object visitAtrLine(CompiladorParser.AtrLineContext ctx){
         AuxiliaTabela auxilia = (AuxiliaTabela)visit(ctx.atr());
         if(auxilia.isRetorno()){
-            ControleContexto cc = new ControleContexto(true, false, "");
-            tabela.adicionaTabela(auxilia.getTipo(), cc);
+            ControleContexto cc = ControleContexto.getInstance(true, false, "");
+            ConteudoContexto conteudo = new ConteudoContexto(auxilia.tipo.tipo, auxilia.ID, auxilia.tipo.valor);
+            tabela.adicionaTabela(cc,conteudo);
+            System.out.println(tabela.tamanhoTabela());
             return true;
         }
         return false;

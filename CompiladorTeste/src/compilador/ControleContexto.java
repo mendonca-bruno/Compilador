@@ -10,6 +10,13 @@ package compilador;
  * @author Bruno
  */
 public class ControleContexto {
+    private static ControleContexto instance;
+    
+    public static ControleContexto getInstance(boolean global, boolean funcao, String nomeFuncao){
+        if(instance == null) instance = new ControleContexto(global, funcao, nomeFuncao);
+        return instance;
+    }
+    
     boolean global;
     boolean funcao;
     String nomeFuncao;

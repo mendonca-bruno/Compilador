@@ -42,6 +42,18 @@ public class CompiladorBaseListener implements CompiladorListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPrintLine(CompiladorParser.PrintLineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrintLine(CompiladorParser.PrintLineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterInitLine(CompiladorParser.InitLineContext ctx) { }
 	/**
 	 * {@inheritDoc}

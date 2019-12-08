@@ -12,10 +12,12 @@ package compilador;
 public class AuxiliaTabela {
     Tipo tipo;
     boolean retorno;
+    String ID;
     
-    public AuxiliaTabela(Tipo tipo, boolean retorno){
+    public AuxiliaTabela(Tipo tipo, boolean retorno, String id){
         this.tipo = tipo;
         this.retorno = retorno;
+        this.ID = id;
     }
 
     public Tipo getTipo() {

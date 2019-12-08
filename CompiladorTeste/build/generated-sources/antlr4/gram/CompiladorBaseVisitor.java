@@ -33,6 +33,13 @@ public class CompiladorBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitPrintLine(CompiladorParser.PrintLineContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitInitLine(CompiladorParser.InitLineContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

@@ -32,6 +32,18 @@ public interface CompiladorListener extends ParseTreeListener {
 	 */
 	void exitAtrLine(CompiladorParser.AtrLineContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code PrintLine}
+	 * labeled alternative in {@link CompiladorParser#line}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrintLine(CompiladorParser.PrintLineContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code PrintLine}
+	 * labeled alternative in {@link CompiladorParser#line}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrintLine(CompiladorParser.PrintLineContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code InitLine}
 	 * labeled alternative in {@link CompiladorParser#line}.
 	 * @param ctx the parse tree

@@ -11,6 +11,7 @@ prog:   (line EOL | func)+ EOF
         | IMPORT '<' VAR'.'GRAMATICA'>'';' prog
         ;
 line:   atr                                                                     #AtrLine
+        | print                                                                 #PrintLine
         | init_                                                                 #InitLine
         | callfunc                                                              #CallFuncLine
         ;

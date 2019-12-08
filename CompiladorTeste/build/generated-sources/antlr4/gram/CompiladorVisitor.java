@@ -26,6 +26,13 @@ public interface CompiladorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAtrLine(CompiladorParser.AtrLineContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code PrintLine}
+	 * labeled alternative in {@link CompiladorParser#line}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrintLine(CompiladorParser.PrintLineContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code InitLine}
 	 * labeled alternative in {@link CompiladorParser#line}.
 	 * @param ctx the parse tree
