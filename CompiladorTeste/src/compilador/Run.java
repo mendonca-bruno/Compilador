@@ -9,6 +9,7 @@ import gram.*;
 import java.awt.HeadlessException;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import org.antlr.v4.gui.TreeViewer;
@@ -22,7 +23,9 @@ import org.antlr.v4.runtime.tree.ParseTree;
  * @author Bruno
  */
 public class Run {
+    public static HashMap<Integer,String> RuleNames = new HashMap<>();
     public static void main(String[] args) throws IOException {
+        
         CharStream input = new ANTLRFileStream("input.txt");
         CompiladorLexer lex = new CompiladorLexer(input);
         TokenStream tokens = new BufferedTokenStream(lex);
@@ -30,8 +33,9 @@ public class Run {
         CompiladorParser.ProgContext prog = parser.prog();
         showParseTreeFrame(prog,parser);
         
-        Visitor visitor = new Visitor();
-        
+        Visitor visitor = new Visitor(parser);
+        addRuleNamesToMap(parser);
+        //System.out.println(parser.getRuleIndex("cmd"));
         visitor.visit(prog);
         
     }
@@ -47,5 +51,13 @@ public class Run {
         frame.setState(JFrame.MAXIMIZED_HORIZ);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+    }
+    
+    private static void addRuleNamesToMap(CompiladorParser parser){
+        int i = 0;
+        for(String s : parser.getRuleNames()){
+            RuleNames.put(i, s);
+            i++;
+        }
     }
 }

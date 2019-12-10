@@ -1,4 +1,4 @@
-// Generated from R:\Users\Bruno\Documents\CompiladorProjeto\Definitivo\CompiladorTeste\grammar\gram\Compilador.g4 by ANTLR 4.6
+// Generated from C:\Users\kags_\Documents\CompiladorI\Compilador\CompiladorTeste\grammar\gram\Compilador.g4 by ANTLR 4.6
 
     package gram;
 
@@ -73,6 +73,18 @@ public class CompiladorBaseListener implements CompiladorListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCallFuncLine(CompiladorParser.CallFuncLineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCommentLine(CompiladorParser.CommentLineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCommentLine(CompiladorParser.CommentLineContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -181,6 +193,18 @@ public class CompiladorBaseListener implements CompiladorListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFuncCmd(CompiladorParser.FuncCmdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLineCmd(CompiladorParser.LineCmdContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLineCmd(CompiladorParser.LineCmdContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

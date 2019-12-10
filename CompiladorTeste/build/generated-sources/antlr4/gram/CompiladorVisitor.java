@@ -1,4 +1,4 @@
-// Generated from R:\Users\Bruno\Documents\CompiladorProjeto\Definitivo\CompiladorTeste\grammar\gram\Compilador.g4 by ANTLR 4.6
+// Generated from C:\Users\kags_\Documents\CompiladorI\Compilador\CompiladorTeste\grammar\gram\Compilador.g4 by ANTLR 4.6
 
     package gram;
 
@@ -46,6 +46,13 @@ public interface CompiladorVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCallFuncLine(CompiladorParser.CallFuncLineContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code CommentLine}
+	 * labeled alternative in {@link CompiladorParser#line}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCommentLine(CompiladorParser.CommentLineContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CompiladorParser#func}.
 	 * @param ctx the parse tree
@@ -108,6 +115,13 @@ public interface CompiladorVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFuncCmd(CompiladorParser.FuncCmdContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code LineCmd}
+	 * labeled alternative in {@link CompiladorParser#cmd}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLineCmd(CompiladorParser.LineCmdContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CompiladorParser#callfunc}.
 	 * @param ctx the parse tree

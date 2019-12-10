@@ -17,12 +17,12 @@ public class Util {
         
         if(tipo1.tipo.equals("Double") || tipo2.tipo.equals("Double")){
             Double resultado = t1.doubleValue() + t2.doubleValue();
-            System.out.println(resultado);
             return new Tipo("Double", resultado);
         }
         
+        
         Integer resultado = t1.intValue() + t2.intValue();
-        System.out.println(resultado);
+        //System.out.println(resultado);
         return new Tipo("Integer", resultado);
     }
 }

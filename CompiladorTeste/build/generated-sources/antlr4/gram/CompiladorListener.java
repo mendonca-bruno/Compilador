@@ -1,4 +1,4 @@
-// Generated from R:\Users\Bruno\Documents\CompiladorProjeto\Definitivo\CompiladorTeste\grammar\gram\Compilador.g4 by ANTLR 4.6
+// Generated from C:\Users\kags_\Documents\CompiladorI\Compilador\CompiladorTeste\grammar\gram\Compilador.g4 by ANTLR 4.6
 
     package gram;
 
@@ -67,6 +67,18 @@ public interface CompiladorListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCallFuncLine(CompiladorParser.CallFuncLineContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code CommentLine}
+	 * labeled alternative in {@link CompiladorParser#line}.
+	 * @param ctx the parse tree
+	 */
+	void enterCommentLine(CompiladorParser.CommentLineContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code CommentLine}
+	 * labeled alternative in {@link CompiladorParser#line}.
+	 * @param ctx the parse tree
+	 */
+	void exitCommentLine(CompiladorParser.CommentLineContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CompiladorParser#func}.
 	 * @param ctx the parse tree
@@ -173,6 +185,18 @@ public interface CompiladorListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFuncCmd(CompiladorParser.FuncCmdContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code LineCmd}
+	 * labeled alternative in {@link CompiladorParser#cmd}.
+	 * @param ctx the parse tree
+	 */
+	void enterLineCmd(CompiladorParser.LineCmdContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code LineCmd}
+	 * labeled alternative in {@link CompiladorParser#cmd}.
+	 * @param ctx the parse tree
+	 */
+	void exitLineCmd(CompiladorParser.LineCmdContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CompiladorParser#callfunc}.
 	 * @param ctx the parse tree

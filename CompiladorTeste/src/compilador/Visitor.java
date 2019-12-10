@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package compilador;
+import static compilador.Run.RuleNames;
 import gram.CompiladorBaseVisitor;
 import gram.CompiladorParser;
 import java.util.ArrayList;
@@ -19,6 +20,11 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * @author Bruno
  */
 public class Visitor extends CompiladorBaseVisitor{
+    CompiladorParser parser;
+    public Visitor(CompiladorParser parser){
+        this.parser = parser;
+    }
+    
     TabelaSimbolos tabela = new TabelaSimbolos();
     
     @Override
@@ -44,17 +50,24 @@ public class Visitor extends CompiladorBaseVisitor{
     
     @Override
     public Object visitIntAtr(CompiladorParser.IntAtrContext ctx){
-        AuxiliaTabela aux;
+        AuxiliaTabela aux = null;
         Token firstToken = ctx.start;
-        Tipo verificaTipo = (Tipo) visit(ctx.expr());        
-        if(verificaTipo.getTipo().equals("Double")){
-            System.out.println("Erro na linha: " +firstToken.getLine() + " Coluna: " +firstToken.getCharPositionInLine() + " - Tipo Incompativel!");
-            aux = new AuxiliaTabela(verificaTipo, false, (String)ctx.VAR().getText());
+        try {
+            Tipo verificaTipo = (Tipo) visit(ctx.expr());
+            //System.out.println(RuleNames.get(ctx.getParent().getRuleIndex()));
+            if(verificaTipo.getTipo().equals("Double")){
+                System.out.println("Erro na linha: " +firstToken.getLine() + " Coluna: " +firstToken.getCharPositionInLine() + " - Tipo Incompativel!");
+                aux = new AuxiliaTabela(verificaTipo, false, (String)ctx.VAR().getText());
+                return aux;
+            }
+            aux = new AuxiliaTabela(verificaTipo, true, (String)ctx.VAR().getText());
             return aux;
+        } catch (Exception e) {
+            String var = (String) visit(ctx.expr());
         }
-        aux = new AuxiliaTabela(verificaTipo, true, (String)ctx.VAR().getText());
         return aux;
     }
+    
     
     @Override
     public Object visitDoubleAtr(CompiladorParser.DoubleAtrContext ctx){
@@ -72,7 +85,7 @@ public class Visitor extends CompiladorBaseVisitor{
     
     @Override
     public Object visitSumExpr(CompiladorParser.SumExprContext ctx){
-        System.out.println(ctx.getParent().getParent().getRuleIndex());
+        
         return new Util().somar((Tipo)visit(ctx.expr()), (Tipo)visit(ctx.term())); //retorna Tipo
     }
     

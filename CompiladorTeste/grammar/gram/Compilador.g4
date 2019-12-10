@@ -14,6 +14,7 @@ line:   atr                                                                     
         | print                                                                 #PrintLine
         | init_                                                                 #InitLine
         | callfunc                                                              #CallFuncLine
+        | LINE_COMMENT                                                          #CommentLine
         ;
 func:   type_ VAR '(' (((type_ VAR)';'?)+|'0') ')' OBR (cmd)+ retr CBR
         | VOID VAR '(' (((type_ VAR)';'?)+|'0') ')' OBR (cmd)+ CBR
@@ -27,6 +28,7 @@ cmd:    atr EOL                                                                 
         | while_                                                                #WhileCmd
         | for_                                                                  #ForCmd 
         | callfunc EOL                                                          #FuncCmd
+        | LINE_COMMENT                                                          #LineCmd
         ;
 callfunc:   VAR'(' ((VAR|NUM)','?)+ ')'
             | VAR '('')'          
@@ -66,7 +68,7 @@ init_: type_ VAR
 retr:   RET VAR EOL                                                             #VarRetr
         | RET expr EOL                                                          #ExprRetr
         ;
-atr:    INT VAR '=' (expr|callfunc)                                             #IntAtr
+atr:    INT VAR '=' (expr|callfunc)                                             #IntAtr //ruleIndex17?
         | DOUBLE VAR '=' (expr|callfunc)                                        #DoubleAtr
         | STRING VAR '=' (STRVALUE|callfunc)                                    #StringAtr
         | BOOL  VAR '=' (TRUE|FALSE)                                            #BoolAtr
@@ -127,8 +129,8 @@ GLOBAL: 'global';
 STRVALUE: '"'[a-zA-Z0-9 ]?[ a-zA-Z0-9_.:]*'"';
 VAR:    [a-zA-Z][a-zA-Z0-9_]*;
 PRINTCONC: (('+'?'"'[a-zA-Z0-9 ]?[ a-zA-Z0-9_:.]*'"')+('+'VAR)?)+;
-NUMDOUBLE: [-]?[0-9]+('.'[0-9]+);
-NUMINT: [-]?[0-9]+;
+NUMDOUBLE: [-+]?[0-9]+('.'[0-9]+);
+NUMINT: [-+]?[0-9]+;
 COMMENT: '/*' .*? '*/' -> skip;
 LINE_COMMENT: '//' ~[\r\n]* -> skip;
 WS: [ \t\r\n]+ -> skip;
