@@ -104,6 +104,17 @@ public class CompiladorParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 	public static class ProgContext extends ParserRuleContext {
+		public ProgContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_prog; }
+	 
+		public ProgContext() { }
+		public void copyFrom(ProgContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class LineFuncProgContext extends ProgContext {
 		public TerminalNode EOF() { return getToken(CompiladorParser.EOF, 0); }
 		public List<LineContext> line() {
 			return getRuleContexts(LineContext.class);
@@ -121,27 +132,40 @@ public class CompiladorParser extends Parser {
 		public FuncContext func(int i) {
 			return getRuleContext(FuncContext.class,i);
 		}
+		public LineFuncProgContext(ProgContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).enterLineFuncProg(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).exitLineFuncProg(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CompiladorVisitor ) return ((CompiladorVisitor<? extends T>)visitor).visitLineFuncProg(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ImportProgContext extends ProgContext {
 		public TerminalNode IMPORT() { return getToken(CompiladorParser.IMPORT, 0); }
 		public TerminalNode VAR() { return getToken(CompiladorParser.VAR, 0); }
 		public TerminalNode GRAMATICA() { return getToken(CompiladorParser.GRAMATICA, 0); }
 		public ProgContext prog() {
 			return getRuleContext(ProgContext.class,0);
 		}
-		public ProgContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_prog; }
+		public ImportProgContext(ProgContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).enterProg(this);
+			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).enterImportProg(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).exitProg(this);
+			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).exitImportProg(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CompiladorVisitor ) return ((CompiladorVisitor<? extends T>)visitor).visitProg(this);
+			if ( visitor instanceof CompiladorVisitor ) return ((CompiladorVisitor<? extends T>)visitor).visitImportProg(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -163,6 +187,7 @@ public class CompiladorParser extends Parser {
 			case BOOL:
 			case VAR:
 			case LINE_COMMENT:
+				_localctx = new LineFuncProgContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(46); 
@@ -198,6 +223,7 @@ public class CompiladorParser extends Parser {
 				}
 				break;
 			case IMPORT:
+				_localctx = new ImportProgContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(52);
@@ -399,6 +425,52 @@ public class CompiladorParser extends Parser {
 	}
 
 	public static class FuncContext extends ParserRuleContext {
+		public FuncContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_func; }
+	 
+		public FuncContext() { }
+		public void copyFrom(FuncContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class VoidFuncContext extends FuncContext {
+		public TerminalNode VOID() { return getToken(CompiladorParser.VOID, 0); }
+		public List<TerminalNode> VAR() { return getTokens(CompiladorParser.VAR); }
+		public TerminalNode VAR(int i) {
+			return getToken(CompiladorParser.VAR, i);
+		}
+		public TerminalNode OBR() { return getToken(CompiladorParser.OBR, 0); }
+		public TerminalNode CBR() { return getToken(CompiladorParser.CBR, 0); }
+		public List<CmdContext> cmd() {
+			return getRuleContexts(CmdContext.class);
+		}
+		public CmdContext cmd(int i) {
+			return getRuleContext(CmdContext.class,i);
+		}
+		public List<Type_Context> type_() {
+			return getRuleContexts(Type_Context.class);
+		}
+		public Type_Context type_(int i) {
+			return getRuleContext(Type_Context.class,i);
+		}
+		public VoidFuncContext(FuncContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).enterVoidFunc(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).exitVoidFunc(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CompiladorVisitor ) return ((CompiladorVisitor<? extends T>)visitor).visitVoidFunc(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class TypeFuncContext extends FuncContext {
 		public List<Type_Context> type_() {
 			return getRuleContexts(Type_Context.class);
 		}
@@ -420,26 +492,47 @@ public class CompiladorParser extends Parser {
 		public CmdContext cmd(int i) {
 			return getRuleContext(CmdContext.class,i);
 		}
-		public TerminalNode VOID() { return getToken(CompiladorParser.VOID, 0); }
-		public TerminalNode MAIN() { return getToken(CompiladorParser.MAIN, 0); }
-		public TerminalNode RET() { return getToken(CompiladorParser.RET, 0); }
-		public TerminalNode EOL() { return getToken(CompiladorParser.EOL, 0); }
-		public TerminalNode INT() { return getToken(CompiladorParser.INT, 0); }
-		public FuncContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_func; }
+		public TypeFuncContext(FuncContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).enterFunc(this);
+			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).enterTypeFunc(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).exitFunc(this);
+			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).exitTypeFunc(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CompiladorVisitor ) return ((CompiladorVisitor<? extends T>)visitor).visitFunc(this);
+			if ( visitor instanceof CompiladorVisitor ) return ((CompiladorVisitor<? extends T>)visitor).visitTypeFunc(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class MainFuncContext extends FuncContext {
+		public TerminalNode MAIN() { return getToken(CompiladorParser.MAIN, 0); }
+		public TerminalNode OBR() { return getToken(CompiladorParser.OBR, 0); }
+		public TerminalNode RET() { return getToken(CompiladorParser.RET, 0); }
+		public TerminalNode EOL() { return getToken(CompiladorParser.EOL, 0); }
+		public TerminalNode CBR() { return getToken(CompiladorParser.CBR, 0); }
+		public TerminalNode INT() { return getToken(CompiladorParser.INT, 0); }
+		public TerminalNode VOID() { return getToken(CompiladorParser.VOID, 0); }
+		public List<CmdContext> cmd() {
+			return getRuleContexts(CmdContext.class);
+		}
+		public CmdContext cmd(int i) {
+			return getRuleContext(CmdContext.class,i);
+		}
+		public MainFuncContext(FuncContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).enterMainFunc(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).exitMainFunc(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CompiladorVisitor ) return ((CompiladorVisitor<? extends T>)visitor).visitMainFunc(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -453,6 +546,7 @@ public class CompiladorParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
 			case 1:
+				_localctx = new TypeFuncContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(69);
@@ -534,6 +628,7 @@ public class CompiladorParser extends Parser {
 				}
 				break;
 			case 2:
+				_localctx = new VoidFuncContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(95);
@@ -613,6 +708,7 @@ public class CompiladorParser extends Parser {
 				}
 				break;
 			case 3:
+				_localctx = new MainFuncContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(120);
@@ -961,6 +1057,17 @@ public class CompiladorParser extends Parser {
 	}
 
 	public static class CallfuncContext extends ParserRuleContext {
+		public CallfuncContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_callfunc; }
+	 
+		public CallfuncContext() { }
+		public void copyFrom(CallfuncContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class ParamCallFuncContext extends CallfuncContext {
 		public List<TerminalNode> VAR() { return getTokens(CompiladorParser.VAR); }
 		public TerminalNode VAR(int i) {
 			return getToken(CompiladorParser.VAR, i);
@@ -969,21 +1076,35 @@ public class CompiladorParser extends Parser {
 		public TerminalNode NUM(int i) {
 			return getToken(CompiladorParser.NUM, i);
 		}
-		public CallfuncContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_callfunc; }
+		public ParamCallFuncContext(CallfuncContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).enterCallfunc(this);
+			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).enterParamCallFunc(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).exitCallfunc(this);
+			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).exitParamCallFunc(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof CompiladorVisitor ) return ((CompiladorVisitor<? extends T>)visitor).visitCallfunc(this);
+			if ( visitor instanceof CompiladorVisitor ) return ((CompiladorVisitor<? extends T>)visitor).visitParamCallFunc(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class VoidCallFuncContext extends CallfuncContext {
+		public TerminalNode VAR() { return getToken(CompiladorParser.VAR, 0); }
+		public VoidCallFuncContext(CallfuncContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).enterVoidCallFunc(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CompiladorListener ) ((CompiladorListener)listener).exitVoidCallFunc(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CompiladorVisitor ) return ((CompiladorVisitor<? extends T>)visitor).visitVoidCallFunc(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -997,6 +1118,7 @@ public class CompiladorParser extends Parser {
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,17,_ctx) ) {
 			case 1:
+				_localctx = new ParamCallFuncContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(159);
@@ -1040,6 +1162,7 @@ public class CompiladorParser extends Parser {
 				}
 				break;
 			case 2:
+				_localctx = new VoidCallFuncContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(170);

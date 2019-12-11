@@ -7,8 +7,12 @@ package compilador;
 import static compilador.Run.RuleNames;
 import gram.CompiladorBaseVisitor;
 import gram.CompiladorParser;
+import gram.CompiladorParser.CmdContext;
+import gram.CompiladorParser.Type_Context;
 import java.util.ArrayList;
+import java.util.List;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.misc.Interval;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -25,7 +29,9 @@ public class Visitor extends CompiladorBaseVisitor{
         this.parser = parser;
     }
     
-    TabelaSimbolos tabela = new TabelaSimbolos();
+    
+    TabelaSimbolos tabela = TabelaSimbolos.getInstace();
+    
     
     @Override
     public Object visitNumDoubleFact(CompiladorParser.NumDoubleFactContext ctx){
@@ -45,6 +51,25 @@ public class Visitor extends CompiladorBaseVisitor{
     @Override
     public Object visitVarFact(CompiladorParser.VarFactContext ctx){
         String id = ctx.getText();
+        ParserRuleContext c = ctx.getParent();
+        String aux = "";       
+        
+        while((aux != "cmd") || (aux != "line")){
+            aux = RuleNames.get(c.getRuleIndex());
+            if(aux =="cmd" || aux=="line") break;
+            //System.out.println(aux);
+            c = c.getParent();
+        }
+        
+        if(aux.equals("line")){ //contexto global
+            ControleContexto cc = ControleContexto.checaContexto(true, false, "");
+            ConteudoContexto conteudo = (ConteudoContexto)tabela.achaValor(cc, id);
+            if(conteudo == null) System.out.println("Variavel \"" +id + "\" não inicializada");
+            Tipo verificaTipo = new Tipo(conteudo.tipo, conteudo.valor);
+            return verificaTipo;
+        }
+        
+        
         return id; //falta retornar o valor deste id.
     }
     
@@ -52,22 +77,49 @@ public class Visitor extends CompiladorBaseVisitor{
     public Object visitIntAtr(CompiladorParser.IntAtrContext ctx){
         AuxiliaTabela aux = null;
         Token firstToken = ctx.start;
-        try {
-            Tipo verificaTipo = (Tipo) visit(ctx.expr());
-            //System.out.println(RuleNames.get(ctx.getParent().getRuleIndex()));
-            if(verificaTipo.getTipo().equals("Double")){
-                System.out.println("Erro na linha: " +firstToken.getLine() + " Coluna: " +firstToken.getCharPositionInLine() + " - Tipo Incompativel!");
-                aux = new AuxiliaTabela(verificaTipo, false, (String)ctx.VAR().getText());
-                return aux;
-            }
-            aux = new AuxiliaTabela(verificaTipo, true, (String)ctx.VAR().getText());
+        Tipo verificaTipo = (Tipo) visit(ctx.expr());
+        //System.out.println(RuleNames.get(ctx.getParent().getRuleIndex()));
+        if(verificaTipo.getTipo().equals("Double")){
+            System.out.println("Erro na linha: " +firstToken.getLine() + " Coluna: " +firstToken.getCharPositionInLine() + " - Tipo Incompativel!");
+            aux = new AuxiliaTabela(verificaTipo, false, (String)ctx.VAR().getText());
             return aux;
-        } catch (Exception e) {
-            String var = (String) visit(ctx.expr());
         }
+        aux = new AuxiliaTabela(verificaTipo, true, (String)ctx.VAR().getText());
         return aux;
+
     }
     
+    
+    @Override
+    public Object visitVoidFunc(CompiladorParser.VoidFuncContext ctx){
+        ControleContexto cc = ControleContexto.checaContexto(false, true, ctx.VAR(0).getText());
+        //System.out.println(cc.getNomeFuncao());
+        int j = 0;
+        for(int i = 1; i<ctx.VAR().size(); i++){
+            ConteudoContexto c = new ConteudoContexto(ctx.type_(j).getText(), ctx.VAR(i).getText(), null);
+            tabela.adicionaTabela(cc, c);
+            j++;
+        }
+
+        ArrayList<String> variaveis = new ArrayList<>();
+        for(TerminalNode node : ctx.VAR()){
+            variaveis.add(node.getText());
+        }
+        ArrayList<String> parametros = new ArrayList<>();
+        for(int i=1; i<ctx.VAR().size(); i++){
+            parametros.add(ctx.VAR(i).getText());
+        }
+
+        FunctionControl tc = new FunctionControl(ctx.VAR(0).getText(), variaveis, parametros, ctx);
+        FunctionTable.getInstace().adicionaTabelaFuncoes(ctx.VAR(0).getText(), tc);
+        return null;
+    } 
+    
+    
+    @Override
+    public Object visitIntType(CompiladorParser.IntTypeContext ctx){
+        return ctx.INT().getText();
+    }
     
     @Override
     public Object visitDoubleAtr(CompiladorParser.DoubleAtrContext ctx){
@@ -85,10 +137,10 @@ public class Visitor extends CompiladorBaseVisitor{
     
     @Override
     public Object visitSumExpr(CompiladorParser.SumExprContext ctx){
-        
+        //System.out.println("Rule Index: " + RuleNames.get(ctx.getParent().getParent().getRuleIndex()));
         return new Util().somar((Tipo)visit(ctx.expr()), (Tipo)visit(ctx.term())); //retorna Tipo
     }
-    
+
     
     @Override
     public Object visitAtrLine(CompiladorParser.AtrLineContext ctx){
@@ -109,7 +161,7 @@ public class Visitor extends CompiladorBaseVisitor{
         String id = (String)visit(ctx.print());
         ControleContexto cc = ControleContexto.checaContexto(true, false, "");
         ConteudoContexto conteudo = (ConteudoContexto)tabela.achaValor(cc, id);
-        System.out.println(conteudo.valor);
+        //System.out.println(conteudo.valor);
         return conteudo;
     }
     

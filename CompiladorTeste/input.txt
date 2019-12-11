@@ -1,9 +1,20 @@
-int x = 3 + -3;
-void foo(0){
-//    print(x);
-    int x = 4;
+int x = 3;
+void foo(int x; int y){
+    int varTeste = x + x;
+    //print(varTeste);
+    int k = x + 10;
+    //print(k);
+    //print(y);
+    int bolinha = y + 1;
+    //print(bolinha);
 }
-int y = 10;
+int y = x+x;
 double k = -5.0;
-//print (x);
-//print (y);
+//print(k);
+//print(y);
+foo(x,y);
+funcTeste(x);
+void funcTeste(int y){
+    int fcVar = y + 10;
+    print (fcVar);
+}

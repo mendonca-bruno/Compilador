@@ -15,6 +15,7 @@ public class ControleContexto {
     private static ArrayList<ControleContexto> contextos;
     
     public static ControleContexto checaContexto(boolean global, boolean funcao, String nomeFuncao){
+        //System.out.println("Nome funcao: "+nomeFuncao);
         ControleContexto novo;
         if(contextos == null){
             contextos = new ArrayList<>();
@@ -29,10 +30,12 @@ public class ControleContexto {
             return novo;
         }
         return novo;
+        
     }
     
     boolean global;
     boolean funcao;
+    boolean chamado = false;
     String nomeFuncao;
     
     public ControleContexto(boolean global, boolean funcao, String nomeFuncao){
@@ -70,5 +73,13 @@ public class ControleContexto {
 
     public void setNomeFuncao(String nomeFuncao) {
         this.nomeFuncao = nomeFuncao;
+    }
+
+    public boolean isChamado() {
+        return chamado;
+    }
+
+    public void setChamado(boolean chamado) {
+        this.chamado = chamado;
     }
 }

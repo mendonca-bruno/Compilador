@@ -18,13 +18,25 @@ public class CompiladorBaseListener implements CompiladorListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterProg(CompiladorParser.ProgContext ctx) { }
+	@Override public void enterLineFuncProg(CompiladorParser.LineFuncProgContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitProg(CompiladorParser.ProgContext ctx) { }
+	@Override public void exitLineFuncProg(CompiladorParser.LineFuncProgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterImportProg(CompiladorParser.ImportProgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitImportProg(CompiladorParser.ImportProgContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -90,13 +102,37 @@ public class CompiladorBaseListener implements CompiladorListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunc(CompiladorParser.FuncContext ctx) { }
+	@Override public void enterTypeFunc(CompiladorParser.TypeFuncContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunc(CompiladorParser.FuncContext ctx) { }
+	@Override public void exitTypeFunc(CompiladorParser.TypeFuncContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVoidFunc(CompiladorParser.VoidFuncContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVoidFunc(CompiladorParser.VoidFuncContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMainFunc(CompiladorParser.MainFuncContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMainFunc(CompiladorParser.MainFuncContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -210,13 +246,25 @@ public class CompiladorBaseListener implements CompiladorListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCallfunc(CompiladorParser.CallfuncContext ctx) { }
+	@Override public void enterParamCallFunc(CompiladorParser.ParamCallFuncContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCallfunc(CompiladorParser.CallfuncContext ctx) { }
+	@Override public void exitParamCallFunc(CompiladorParser.ParamCallFuncContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVoidCallFunc(CompiladorParser.VoidCallFuncContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVoidCallFunc(CompiladorParser.VoidCallFuncContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

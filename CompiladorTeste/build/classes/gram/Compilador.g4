@@ -7,8 +7,8 @@ grammar Compilador;
     package gram;
 }
 
-prog:   (line EOL | func)+ EOF
-        | IMPORT '<' VAR'.'GRAMATICA'>'';' prog
+prog:   (line EOL | func)+ EOF                                                  #LineFuncProg
+        | IMPORT '<' VAR'.'GRAMATICA'>'';' prog                                 #ImportProg
         ;
 line:   atr                                                                     #AtrLine
         | print                                                                 #PrintLine
@@ -16,9 +16,9 @@ line:   atr                                                                     
         | callfunc                                                              #CallFuncLine
         | LINE_COMMENT                                                          #CommentLine
         ;
-func:   type_ VAR '(' (((type_ VAR)';'?)+|'0') ')' OBR (cmd)+ retr CBR
-        | VOID VAR '(' (((type_ VAR)';'?)+|'0') ')' OBR (cmd)+ CBR
-        | (INT|VOID) MAIN '(' '0' ')' OBR (cmd)+ RET '0' EOL CBR
+func:   type_ VAR '(' (((type_ VAR)';'?)+|'0') ')' OBR (cmd)+ retr CBR          #TypeFunc
+        | VOID VAR '(' (((type_ VAR)';'?)+|'0') ')' OBR (cmd)+ CBR              #VoidFunc
+        | (INT|VOID) MAIN '(' '0' ')' OBR (cmd)+ RET '0' EOL CBR                #MainFunc
         ;
 cmd:    atr EOL                                                                 #AtrCmd
         | init_ EOL                                                             #InitCmd
@@ -30,8 +30,8 @@ cmd:    atr EOL                                                                 
         | callfunc EOL                                                          #FuncCmd
         | LINE_COMMENT                                                          #LineCmd
         ;
-callfunc:   VAR'(' ((VAR|NUM)','?)+ ')'
-            | VAR '('')'          
+callfunc:   VAR'(' ((VAR|NUM)','?)+ ')'                                         #ParamCallFunc
+            | VAR '('')'                                                        #VoidCallFunc
             ;
 while_: WHILE '(' cond ')' OBR (cmd)+ CBR
         ;

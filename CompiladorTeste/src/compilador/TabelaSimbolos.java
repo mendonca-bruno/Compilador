@@ -13,6 +13,15 @@ import java.util.HashMap;
  * @author Bruno
  */
 public class TabelaSimbolos {
+    private static TabelaSimbolos instance;
+    
+    public static TabelaSimbolos getInstace(){
+        if(instance == null){
+            instance = new TabelaSimbolos();
+        }
+        return instance;
+    }
+    
     private static HashMap <ControleContexto,ArrayList<ConteudoContexto>> tabelaSimbolo;
     
     public TabelaSimbolos(){
@@ -58,5 +67,23 @@ public class TabelaSimbolos {
         }
         
         return valor;
+    }
+    
+    public ArrayList<ConteudoContexto> pegaConteudo(ControleContexto cc){
+        return tabelaSimbolo.get(cc);
+    }
+    
+    public ConteudoContexto retornaContexto(ControleContexto cc, String var){
+        ConteudoContexto conteudo = null;
+        ArrayList<ConteudoContexto> contextos = tabelaSimbolo.get(cc);
+        
+        for(ConteudoContexto cxt : contextos){
+            if(cxt.id.equals(var)){
+                conteudo = cxt;
+                return conteudo;
+            }
+        }
+        
+        return conteudo;
     }
 }

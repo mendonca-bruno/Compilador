@@ -13,11 +13,19 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface CompiladorVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link CompiladorParser#prog}.
+	 * Visit a parse tree produced by the {@code LineFuncProg}
+	 * labeled alternative in {@link CompiladorParser#prog}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitProg(CompiladorParser.ProgContext ctx);
+	T visitLineFuncProg(CompiladorParser.LineFuncProgContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ImportProg}
+	 * labeled alternative in {@link CompiladorParser#prog}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImportProg(CompiladorParser.ImportProgContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code AtrLine}
 	 * labeled alternative in {@link CompiladorParser#line}.
@@ -54,11 +62,26 @@ public interface CompiladorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCommentLine(CompiladorParser.CommentLineContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CompiladorParser#func}.
+	 * Visit a parse tree produced by the {@code TypeFunc}
+	 * labeled alternative in {@link CompiladorParser#func}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunc(CompiladorParser.FuncContext ctx);
+	T visitTypeFunc(CompiladorParser.TypeFuncContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code VoidFunc}
+	 * labeled alternative in {@link CompiladorParser#func}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVoidFunc(CompiladorParser.VoidFuncContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code MainFunc}
+	 * labeled alternative in {@link CompiladorParser#func}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMainFunc(CompiladorParser.MainFuncContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code AtrCmd}
 	 * labeled alternative in {@link CompiladorParser#cmd}.
@@ -123,11 +146,19 @@ public interface CompiladorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLineCmd(CompiladorParser.LineCmdContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CompiladorParser#callfunc}.
+	 * Visit a parse tree produced by the {@code ParamCallFunc}
+	 * labeled alternative in {@link CompiladorParser#callfunc}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCallfunc(CompiladorParser.CallfuncContext ctx);
+	T visitParamCallFunc(CompiladorParser.ParamCallFuncContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code VoidCallFunc}
+	 * labeled alternative in {@link CompiladorParser#callfunc}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVoidCallFunc(CompiladorParser.VoidCallFuncContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CompiladorParser#while_}.
 	 * @param ctx the parse tree

@@ -35,9 +35,11 @@ public class Run {
         
         Visitor visitor = new Visitor(parser);
         addRuleNamesToMap(parser);
+        VisitadorInterpretador visitador = new VisitadorInterpretador(parser);
         //System.out.println(parser.getRuleIndex("cmd"));
         visitor.visit(prog);
-        
+        //visitador.visit(FunctionTable.getInstace().getFunc("foo").getVoidContexto());
+        visitador.visit(prog);
     }
     private static void showParseTreeFrame(ParseTree tree, CompiladorParser parser) throws HeadlessException {
         JFrame frame = new JFrame("SRC: " + tree.getText());

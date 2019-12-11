@@ -10,15 +10,29 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface CompiladorListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link CompiladorParser#prog}.
+	 * Enter a parse tree produced by the {@code LineFuncProg}
+	 * labeled alternative in {@link CompiladorParser#prog}.
 	 * @param ctx the parse tree
 	 */
-	void enterProg(CompiladorParser.ProgContext ctx);
+	void enterLineFuncProg(CompiladorParser.LineFuncProgContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CompiladorParser#prog}.
+	 * Exit a parse tree produced by the {@code LineFuncProg}
+	 * labeled alternative in {@link CompiladorParser#prog}.
 	 * @param ctx the parse tree
 	 */
-	void exitProg(CompiladorParser.ProgContext ctx);
+	void exitLineFuncProg(CompiladorParser.LineFuncProgContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code ImportProg}
+	 * labeled alternative in {@link CompiladorParser#prog}.
+	 * @param ctx the parse tree
+	 */
+	void enterImportProg(CompiladorParser.ImportProgContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code ImportProg}
+	 * labeled alternative in {@link CompiladorParser#prog}.
+	 * @param ctx the parse tree
+	 */
+	void exitImportProg(CompiladorParser.ImportProgContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code AtrLine}
 	 * labeled alternative in {@link CompiladorParser#line}.
@@ -80,15 +94,41 @@ public interface CompiladorListener extends ParseTreeListener {
 	 */
 	void exitCommentLine(CompiladorParser.CommentLineContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CompiladorParser#func}.
+	 * Enter a parse tree produced by the {@code TypeFunc}
+	 * labeled alternative in {@link CompiladorParser#func}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunc(CompiladorParser.FuncContext ctx);
+	void enterTypeFunc(CompiladorParser.TypeFuncContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CompiladorParser#func}.
+	 * Exit a parse tree produced by the {@code TypeFunc}
+	 * labeled alternative in {@link CompiladorParser#func}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunc(CompiladorParser.FuncContext ctx);
+	void exitTypeFunc(CompiladorParser.TypeFuncContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code VoidFunc}
+	 * labeled alternative in {@link CompiladorParser#func}.
+	 * @param ctx the parse tree
+	 */
+	void enterVoidFunc(CompiladorParser.VoidFuncContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code VoidFunc}
+	 * labeled alternative in {@link CompiladorParser#func}.
+	 * @param ctx the parse tree
+	 */
+	void exitVoidFunc(CompiladorParser.VoidFuncContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code MainFunc}
+	 * labeled alternative in {@link CompiladorParser#func}.
+	 * @param ctx the parse tree
+	 */
+	void enterMainFunc(CompiladorParser.MainFuncContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code MainFunc}
+	 * labeled alternative in {@link CompiladorParser#func}.
+	 * @param ctx the parse tree
+	 */
+	void exitMainFunc(CompiladorParser.MainFuncContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code AtrCmd}
 	 * labeled alternative in {@link CompiladorParser#cmd}.
@@ -198,15 +238,29 @@ public interface CompiladorListener extends ParseTreeListener {
 	 */
 	void exitLineCmd(CompiladorParser.LineCmdContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CompiladorParser#callfunc}.
+	 * Enter a parse tree produced by the {@code ParamCallFunc}
+	 * labeled alternative in {@link CompiladorParser#callfunc}.
 	 * @param ctx the parse tree
 	 */
-	void enterCallfunc(CompiladorParser.CallfuncContext ctx);
+	void enterParamCallFunc(CompiladorParser.ParamCallFuncContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CompiladorParser#callfunc}.
+	 * Exit a parse tree produced by the {@code ParamCallFunc}
+	 * labeled alternative in {@link CompiladorParser#callfunc}.
 	 * @param ctx the parse tree
 	 */
-	void exitCallfunc(CompiladorParser.CallfuncContext ctx);
+	void exitParamCallFunc(CompiladorParser.ParamCallFuncContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code VoidCallFunc}
+	 * labeled alternative in {@link CompiladorParser#callfunc}.
+	 * @param ctx the parse tree
+	 */
+	void enterVoidCallFunc(CompiladorParser.VoidCallFuncContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code VoidCallFunc}
+	 * labeled alternative in {@link CompiladorParser#callfunc}.
+	 * @param ctx the parse tree
+	 */
+	void exitVoidCallFunc(CompiladorParser.VoidCallFuncContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CompiladorParser#while_}.
 	 * @param ctx the parse tree
